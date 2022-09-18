@@ -6,7 +6,7 @@ const UserDetails = () => {
   useEffect(() => {
     const options = {
       method: "GET",
-      url: `${process.env.BASE_URL}/johnpapa`,
+      url: "https://api.github.com/users/johnpapa",
       headers: {
         "User-Agent": "request",
       },

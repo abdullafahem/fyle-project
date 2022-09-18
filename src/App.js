@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     const options = {
       method: "GET",
-      url: `${process.env.BASE_URL}/johnpapa/repos?per_page=10&page=${
+      url: `https://api.github.com/users/johnpapa/repos?per_page=10&page=${
         currentPage
       }`,
       headers: {

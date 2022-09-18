@@ -7,7 +7,7 @@ const RepoCard = (props) => {
   useEffect(() => {
     const options = {
       method: "GET",
-      url: `${process.env.REPO_URL}/${props.repo.owner.login}/${props.repo.name}/languages`,
+      url: `https://api.github.com/repos/${props.repo.owner.login}/${props.repo.name}/languages`,
       headers: {
         "User-Agent": "request",
       },
