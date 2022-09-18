@@ -8,11 +8,21 @@ import UserDetails from "./components/UserDetails";
 
 function App() {
   const [repos, setRepos] = useState(null);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
   useEffect(() => {
-    const options = {
+    const optionsUser = {
+      method: "GET",
+      url: "https://api.github.com/users/johnpapa",
+
+      headers: {
+        "User-Agent": "request",
+      },
+    };
+
+    const optionsRepo = {
       method: "GET",
       url: `https://api.github.com/users/johnpapa/repos?per_page=10&page=${
         currentPage
@@ -22,8 +32,12 @@ function App() {
       },
     };
 
+    axios.request(optionsUser).then(function (response) {
+      setUser(response.data);
+    });
+
     axios
-      .request(options)
+      .request(optionsRepo)
       .then(function (response) {
         setRepos(response.data);
 
@@ -49,7 +63,7 @@ function App() {
 
   return (
     <div className='container'>
-      <div className='row mt-3'><UserDetails/></div>
+      <div className='row mt-3'><UserDetails user={user}/></div>
       <div className='row'>
         {repos &&
           repos.map((repo) => {
