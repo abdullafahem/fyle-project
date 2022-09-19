@@ -28,12 +28,12 @@ const RepoCard = (props) => {
           <div className='card-body'>
             <h4 className='card-title'>{props.repo.name}</h4>
             <p className='card-text'>{props.repo.description}</p>
-            <p className='card-text'>
+            <div className='card-text'>
               {languages &&
                 Object.keys(languages).map((language, index) => (
                     <Language language={language} key={index}/>
                 ))}
-            </p>
+            </div>
           </div>
         </div>
     </div>
