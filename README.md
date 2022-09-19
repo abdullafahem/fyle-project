@@ -1,5 +1,5 @@
 <h1>fyle-project</h1>
-<hr><p>Design a Github repositories listing page by passing the required Github username.</p><h2>General Information</h2>
+<hr><p>Design of GitHub repositories listing page by passing the required Github username.</p><h2>General Information</h2>
 <hr><ul>
 <li>This is a project for statement management with a simple UI and easy to understand.</li>
 </ul><h2>Technologies Used</h2>
