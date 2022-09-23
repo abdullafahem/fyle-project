@@ -12,16 +12,17 @@ const getGithubUser = async () => {
   return data;
 };
 
-const getGithubRepos = async (currentPage) => {
-  const { data } = await axios.get(
-    `https://api.github.com/users/johnpapa/repos?per_page=10&page=${currentPage}`
-  );
-  return data;
-};
+const getGithubRepos = async (search, currentPage) => {
+  const qUser = 'user:johnpapa';
+  let queryUrl = 'q=';
+  if (search) {
+    queryUrl += encodeURIComponent(`${qUser} ${search} in:name`);
+  } else {
+    queryUrl += encodeURIComponent(qUser);
+  }
 
-const getSearchedRepos = async (search) => {
   const { data } = await axios.get(
-    `https://api.github.com/search/repositories?q=${search}`
+    `https://api.github.com/search/repositories?${queryUrl}&page=${currentPage}&per_page=10`
   );
   return data;
 };
@@ -35,24 +36,21 @@ function App() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    if (search) {
-      getSearchedRepos(search).then((data) => {
-        setRepos(data.items);
-        setLoading(false);
-      });
-    } else {
-      getGithubUser().then((data) => {
-        setUser(data);
-      });
+    getGithubUser().then((data) => {
+      setUser(data);
+    });
 
-      getGithubRepos(currentPage).then((data) => {
-        setRepos(data);
-        console.log('data', data.length);
-
-        setPageCount(Math.ceil(data.length / 2));
-        setLoading(false);
-      });
+    if (search === '') {
+      setSearch(null);
+      setPageCount(0);
+      setCurrentPage(1);
     }
+
+    getGithubRepos(search, currentPage).then((data) => {
+      setRepos(data.items);
+      setPageCount(Math.ceil(data.total_count / 10));
+      setLoading(false);
+    });
   }, [currentPage, search]);
 
   const handlePageChange = (data) => {

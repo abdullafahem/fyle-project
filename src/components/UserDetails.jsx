@@ -1,7 +1,6 @@
-import React from "react";
+import React from 'react';
 
 const UserDetails = (props) => {
-  
   return (
     <div>
       <div className='row'>
@@ -9,13 +8,15 @@ const UserDetails = (props) => {
           <img
             className='rounded-circle w-50 float-start '
             src={props.user.avatar_url}
-            alt={props.user.name}
+            alt={props.user.login}
           />
         </div>
         <div className='col-md-8'>
-          <h1>{props.user.name}</h1>
+          <h1>{props.user.login}</h1>
           <p></p>
-          <p><i className="fa-solid fa-location-dot"></i> {props.user.location}</p>
+          <p>
+            <i className='fa-solid fa-location-dot'></i> {props.user.location}
+          </p>
           <p>Twitter: {props.user.twitter_username}</p>
         </div>
       </div>
