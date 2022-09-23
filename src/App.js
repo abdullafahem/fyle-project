@@ -40,12 +40,6 @@ function App() {
       setUser(data);
     });
 
-    if (search === '') {
-      setSearch(null);
-      setPageCount(0);
-      setCurrentPage(1);
-    }
-
     getGithubRepos(search, currentPage).then((data) => {
       setRepos(data.items);
       setPageCount(Math.ceil(data.total_count / 10));
